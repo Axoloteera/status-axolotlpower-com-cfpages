@@ -5,9 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>AxolotlPower Status</title>
 		<style>
-			body {
-				text-align: center;
-			}
 			h1 {
 				font-size: 3em;
 			}
@@ -31,12 +28,12 @@
                     .then(response => response.json())
                     .then(data => {
                         var allStatus = true;
-                        var container = document.getElementById("div-c");
+                        var container = document.getElementById("table-c");
                         for (var [name, ob] of Object.entries(data['monitors'])) {
                             if (ob["status"]) {
-                                container.innerHTML += `<h2 title='LastChecked:${timestamp2String(ob["time"])}'><font color=\"black\">${name}</font><font color="green">&emsp;~Up </font></h2>`;
+                                container.innerHTML += `<tr title='LastChecked: ${timestamp2String(ob["time"])}'><td style="background-color:green"><font size="50px">&emsp;</font></td><td><font color=\"black\" size="50px">${name}</font></td><tr>`;
                             } else {
-                                container.innerHTML += `<h2 title='${timestamp2String(ob["time"])}'><font color=\"black\">${name}</font><font color="red">&emsp;~Down </font></h2>`;
+                                container.innerHTML += `<tr title='LastChecked: ${timestamp2String(ob["time"])}'><td style="background-color:red"><font size="50px">&emsp;</font></td><td><font color=\"black\" size="50px">${name}</font></td><tr>`;
                                 allStatus = false;
                             }
                         }
@@ -62,8 +59,8 @@
 		<h2 class="visible" id="h-tip">Please Wait......</h2>
 		<h2 style="color: green" class="hidden" id="srv-o">All systems operational</h2>
 		<h2 style="color: orange" class="hidden" id="srv-d">Some systems down</h2>
-		<p id="p-notice"></p>
-		<div id="div-c"></div>
+		<h3 id="p-notice"></h3>
+		<table><tbody id="table-c"></tbody></table>
         <p><a href="https://github.com/Gtd232" style="color: black; ">GitHub@Gtd232</a>,2024</p>
 	</body>
 </html>
